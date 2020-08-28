@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { Container } from './styles';
+interface User {
+  id: number;
+  name: string;
+}
 
-const Main = () => {
+const UserList: React.FC = () => {
+  const [data, setData] = useState<User[]>([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3333/users').then((response) => {
+      response.json().then((users) => {
+        setData(users);
+      });
+    });
+  }, []);
+
   return (
-    <Container>
-      <h1>Main</h1>
-    </Container>
+    <ul>
+      {data.map((user) => (
+        <li key={user.id}>
+          <Link to={`/users/${user.id}`}>{user.name}</Link>
+        </li>
+      ))}
+    </ul>
   );
 };
-export default Main;
+
+export default UserList;

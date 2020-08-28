@@ -1,21 +1,14 @@
 import React from 'react';
-import { BrowserRouter, Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import Routes from './routes';
-import history from './services/history';
-import GlobalStyle from './styles/global';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <>
-      <GlobalStyle />
-      <BrowserRouter>
-        <Router history={history}>
-          <Routes />
-        </Router>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
